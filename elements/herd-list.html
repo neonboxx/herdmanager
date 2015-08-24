@@ -1,27 +1,41 @@
-  <dom-module id="herd-list">
-      <template>
-        <firebase-collection
-          order-by-child="height"
-          limit-to-first="3"
-          location="{{firebaseUrl}}"
-          data="{{animals}}"></firebase-collection>
-        <template is="dom-repeat" items="[[animals]]" as="animal">
-          <h4>[[animal.__firebaseKey__]]</h4>
-          <span>Id: </span><span>[[animal.id]]</span>
-          <span>Name: </span><span>[[animal.name]]</span>
-        </template>
-      </template>
-  </dom-module>
-  <script>
-    
-      Polymer({
+<head>
+    <link href="../bower_components/iron-list/iron-list.html" rel="import">    
+    <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+    <link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+</head>
+<dom-module id="herd-list">
+    <template>
+        <paper-material elevation="1">
+            <firebase-collection id="firebaseCollection" order-by-child="height" location="{{firebaseUrl}}" data="{{animals}}"></firebase-collection>
+            <iron-list items="[[animals]]" as="animal">
+                <template>
+                    <paper-material>
+                        <paper-item>
+                            <paper-item-body class="flex" two-line>
+                                <div>Id: <span>[[animal.id]]</span></div>
+                                <div secondarty>Name: <span>[[animal.name]]</span></div>
+                            </paper-item-body>
+                            <paper-icon-button icon="clear" on-click="remove"></paper-icon-button>
+                        </paper-item>
+                        
+                        
+                    </paper-material>
+                </template>
+            </iron-list>
+        </paper-material>
+    </template>
+</dom-module>
+<script>
+    Polymer({
         is: 'herd-list',
-        properties:{
-          firebaseUrl:{
-            type:String,
-            value:"https://glaring-inferno-2560.firebaseio.com/herds"
-          }
+        properties: {
+            firebaseUrl: {
+                type: String,
+                value: "https://glaring-inferno-2560.firebaseio.com/herds"
+            }
+        },
+        remove:function(e){
+            this.$.firebaseCollection.removeByKey(e.model.__data__.animal.__firebaseKey__);
         }
-      });
-    
-  </script>
+    });
+</script>

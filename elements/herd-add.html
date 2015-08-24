@@ -1,4 +1,5 @@
   <dom-module id="herd-add">
+    
       <template>
         <firebase-collection id="firebaseCollection"
           location="{{firebaseUrl}}"
@@ -6,7 +7,7 @@
         <paper-input value="{{newAnimal.id::input}}" label="Id"></paper-input>
         <paper-input value="{{newAnimal.name::input}}" label="Name"></paper-input>
         <paper-button raised on-click="addAnimal">Add</paper-button>
-      </template>
+      </template>   
   </dom-module>
   <script>
     

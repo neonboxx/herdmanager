@@ -1,0 +1,59 @@
+<head>
+    <link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+    <link href="../bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+    <link href="../bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+    <link href="../bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+    <link rel="import" href="../bower_components/paper-material/paper-material.html">
+    <link rel="import" href="../bower_components/paper-item/paper-item.html">
+    <link rel="import" href="herd-list.html">
+    <link rel="import" href="herd-add.html">
+    
+</head>
+
+
+<dom-module id="herd-manager">
+      <template>
+          
+          <paper-drawer-panel>
+            <paper-header-panel drawer>
+                <paper-toolbar>
+                    <paper-item>Menu</paper-item>
+                </paper-toolbar>
+                <paper-menu selected="0">
+                    <paper-item>List</paper-item>
+                    <paper-item>empty</paper-item>
+                    <paper-item>empty</paper-item>
+                    <paper-item>empty</paper-item>
+                </paper-menu>
+            </paper-header-panel>
+            <paper-header-panel main>
+                <paper-toolbar >
+                    <paper-item>Main</paper-item>
+                </paper-toolbar>
+                <paper-material>
+                    <herd-add></herd-add>
+                    <herd-list></herd-list>
+                </paper-material>
+            </paper-header-panel>
+                
+                
+            </paper-header-panel>
+        </paper-drawer-panel> 
+          
+          
+          
+      </template>
+  </dom-module>
+  <script>
+    
+      Polymer({
+        is: 'herd-manager',
+        properties:{
+          firebaseUrl:{
+            type:String,
+            value:"https://glaring-inferno-2560.firebaseio.com"
+          }
+        }
+      });
+    
+  </script>
