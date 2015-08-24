@@ -1,12 +1,15 @@
 <head>
     <link href="../bower_components/iron-list/iron-list.html" rel="import">    
     <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+    <link href="../bower_components/paper-dialog/paper-dialog.html" rel="import">
+    <link href="../bower_components/paper-button/paper-button.html" rel="import">
     <link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
 </head>
 <dom-module id="herd-list">
     <template>
-        <paper-material elevation="1">
             <firebase-collection id="firebaseCollection" order-by-child="height" location="{{firebaseUrl}}" data="{{animals}}"></firebase-collection>
+            
+        
             <iron-list items="[[animals]]" as="animal">
                 <template>
                     <paper-material>
@@ -15,14 +18,23 @@
                                 <div>Id: <span>[[animal.id]]</span></div>
                                 <div secondarty>Name: <span>[[animal.name]]</span></div>
                             </paper-item-body>
-                            <paper-icon-button icon="clear" on-click="remove"></paper-icon-button>
+                            <paper-icon-button icon="create" on-click="edit"></paper-icon-button>
+                            <paper-icon-button icon="clear" on-click="confirmDelete"></paper-icon-button>
+                            
                         </paper-item>
                         
                         
                     </paper-material>
                 </template>
             </iron-list>
-        </paper-material>
+            <paper-dialog modal id="acceptDelete">
+              <h2>Header</h2>
+                Lorem ipsum...
+              <div class="buttons">
+                <paper-button dialog-dismiss>Cancel</paper-button>
+                <paper-button dialog-confirm>Accept</paper-button>
+              </div>
+            </paper-dialog>
     </template>
 </dom-module>
 <script>
@@ -34,8 +46,15 @@
                 value: "https://glaring-inferno-2560.firebaseio.com/herds"
             }
         },
+        confirmDelete:function(){
+            var dialog = document.getElementById('acceptDelete')
+            dialog.open();
+        },
         remove:function(e){
             this.$.firebaseCollection.removeByKey(e.model.__data__.animal.__firebaseKey__);
+        },
+        edit:function(e){
+            //this.$.firebaseCollection.removeByKey(e.model.__data__.animal.__firebaseKey__);
         }
     });
 </script>

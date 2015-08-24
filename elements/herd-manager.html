@@ -5,6 +5,7 @@
     <link href="../bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
     <link rel="import" href="../bower_components/paper-material/paper-material.html">
     <link rel="import" href="../bower_components/paper-item/paper-item.html">
+    <link rel="import" href="../bower_components/paper-menu/paper-menu.html">
     <link rel="import" href="herd-list.html">
     <link rel="import" href="herd-add.html">
     
@@ -14,7 +15,7 @@
 <dom-module id="herd-manager">
       <template>
           
-          <paper-drawer-panel>
+          <paper-drawer-panel id="paperDrawerPanel">
             <paper-header-panel drawer>
                 <paper-toolbar>
                     <paper-item>Menu</paper-item>
@@ -26,14 +27,20 @@
                     <paper-item>empty</paper-item>
                 </paper-menu>
             </paper-header-panel>
-            <paper-header-panel main>
+            <paper-header-panel main class="main-panel">
                 <paper-toolbar >
                     <paper-item>Main</paper-item>
                 </paper-toolbar>
-                <paper-material>
-                    <herd-add></herd-add>
-                    <herd-list></herd-list>
-                </paper-material>
+                <div style="border-left: 1px solid #ccc;">
+                    <paper-material id="herdAdd" elevation="2">
+                        <herd-add></herd-add>
+                    </paper-material>
+                     <paper-material id="herdList" elevation="1">
+                    <div id="list">
+                        <herd-list></herd-list>
+                    </div>
+                    </paper-material>
+                </div>
             </paper-header-panel>
                 
                 
@@ -44,6 +51,25 @@
           
       </template>
   </dom-module>
+<style>
+#herdAdd{
+    margin: 0;
+		width: 100%;
+		max-width: none;
+		border-bottom: 1px solid #ccc;
+}
+.main-panel {
+		background-color: #eee;
+		bottom:0px;
+	}
+    paper-material {
+		background-color: #fff;
+	}
+    #list {
+		overflow-y: scroll;
+		height: 66vh;
+	}
+</style>
   <script>
     
       Polymer({
