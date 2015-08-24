@@ -1,0 +1,30 @@
+  <dom-module id="herd-add">
+      <template>
+        <firebase-collection id="firebaseCollection"
+          location="{{firebaseUrl}}"
+          data="{{animals}}"></firebase-collection>
+        <paper-input value="{{newAnimal.id::input}}" label="Id"></paper-input>
+        <paper-input value="{{newAnimal.name::input}}" label="Name"></paper-input>
+        <paper-button raised on-click="addAnimal">Add</paper-button>
+      </template>
+  </dom-module>
+  <script>
+    
+      Polymer({
+        is: 'herd-add',
+        properties:{
+          firebaseUrl:{
+            type:String,
+            value:"https://glaring-inferno-2560.firebaseio.com/herds"
+          },
+          newAnimal:{
+            type: Object,
+            value: {id:null,name:null}
+          }
+        },
+        addAnimal:function(){
+          this.$.firebaseCollection.add(this.newAnimal)
+        }
+      });
+    
+  </script>

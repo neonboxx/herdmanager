@@ -1,0 +1,27 @@
+  <dom-module id="herd-list">
+      <template>
+        <firebase-collection
+          order-by-child="height"
+          limit-to-first="3"
+          location="{{firebaseUrl}}"
+          data="{{animals}}"></firebase-collection>
+        <template is="dom-repeat" items="[[animals]]" as="animal">
+          <h4>[[animal.__firebaseKey__]]</h4>
+          <span>Id: </span><span>[[animal.id]]</span>
+          <span>Name: </span><span>[[animal.name]]</span>
+        </template>
+      </template>
+  </dom-module>
+  <script>
+    
+      Polymer({
+        is: 'herd-list',
+        properties:{
+          firebaseUrl:{
+            type:String,
+            value:"https://glaring-inferno-2560.firebaseio.com/herds"
+          }
+        }
+      });
+    
+  </script>

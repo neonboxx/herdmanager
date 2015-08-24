@@ -1,0 +1,17 @@
+{
+  "name": "HerdManager",
+  "version": "0.0.1",
+  "authors": [
+    "John Bradshaw <neonboxx@gmail.com>"
+  ],
+  "description": "Herd management system",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "/",
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.0.0",
+    "firebase-element": "GoogleWebComponents/firebase-element#~1.0.3",
+    "paper-button": "PolymerElements/paper-button#~1.0.3",
+    "paper-input": "PolymerElements/paper-input#~1.0.11"
+  }
+}
