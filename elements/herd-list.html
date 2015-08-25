@@ -1,5 +1,5 @@
 <head>
-    <link href="../bower_components/iron-list/iron-list.html" rel="import">    
+    <link href="../bower_components/iron-list/iron-list.html" rel="import">
     <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
     <link href="../bower_components/paper-dialog/paper-dialog.html" rel="import">
     <link href="../bower_components/paper-button/paper-button.html" rel="import">
@@ -7,34 +7,36 @@
 </head>
 <dom-module id="herd-list">
     <template>
-            <firebase-collection id="firebaseCollection" order-by-child="height" location="{{firebaseUrl}}" data="{{animals}}"></firebase-collection>
-            
-        
-            <iron-list items="[[animals]]" as="animal">
-                <template>
-                    <paper-material>
-                        <paper-item>
-                            <paper-item-body class="flex" two-line>
-                                <div>Id: <span>[[animal.id]]</span></div>
-                                <div secondarty>Name: <span>[[animal.name]]</span></div>
-                            </paper-item-body>
-                            <paper-icon-button icon="create" on-click="edit"></paper-icon-button>
-                            <paper-icon-button icon="clear" on-click="confirmDelete"></paper-icon-button>
-                            
-                        </paper-item>
-                        
-                        
-                    </paper-material>
-                </template>
-            </iron-list>
-            <paper-dialog modal id="acceptDelete">
-              <h2>Header</h2>
-                Lorem ipsum...
-              <div class="buttons">
+        <firebase-collection id="firebaseCollection" order-by-child="height" location="{{firebaseUrl}}" data="{{animals}}"></firebase-collection>
+
+        <paper-dialog modal id="acceptDelete">
+            <h2>Confirm</h2>
+            <p>Are you sure you want to delete?</p>
+            <div class="buttons">
                 <paper-button dialog-dismiss>Cancel</paper-button>
-                <paper-button dialog-confirm>Accept</paper-button>
-              </div>
-            </paper-dialog>
+                <paper-button dialog-confirm on-tap="remove">Accept</paper-button>
+            </div>
+        </paper-dialog>
+        
+        <paper-dialog id="editDialogue">
+            <paper-item>{{animalToEdit.id}}</paper-item>
+            <paper-item>{{animalToEdit.name}}</paper-item>
+        </paper-dialog>
+        
+        <iron-list items="[[animals]]" as="animal">
+            <template>
+                <paper-material>
+                    <paper-item>
+                        <paper-item-body class="flex" two-line>
+                            <div>Id: <span>[[animal.id]]</span></div>
+                            <div secondarty>Name: <span>[[animal.name]]</span></div>
+                        </paper-item-body>
+                        <paper-icon-button icon="create" on-tap="edit"></paper-icon-button>
+                        <paper-icon-button icon="clear" on-tap="confirmDelete"></paper-icon-button>
+                    </paper-item>
+                </paper-material>
+            </template>
+        </iron-list>
     </template>
 </dom-module>
 <script>
@@ -44,17 +46,23 @@
             firebaseUrl: {
                 type: String,
                 value: "https://glaring-inferno-2560.firebaseio.com/herds"
-            }
+            },
+            editKey: String,
+            animalToEdit:Object
         },
-        confirmDelete:function(){
+        confirmDelete: function (e) {
             var dialog = document.getElementById('acceptDelete')
+            this.editKey = e.model.__data__.animal.__firebaseKey__
             dialog.open();
         },
-        remove:function(e){
-            this.$.firebaseCollection.removeByKey(e.model.__data__.animal.__firebaseKey__);
+        remove: function (e) {
+            this.$.firebaseCollection.removeByKey(this.editKey);
         },
-        edit:function(e){
-            //this.$.firebaseCollection.removeByKey(e.model.__data__.animal.__firebaseKey__);
+        edit: function (e) {
+            this.editKey = e.model.__data__.animal.__firebaseKey__
+            this.animalToEdit = e.model.__data__.animal;
+            var dialog = document.getElementById('editDialogue')
+            dialog.open();
         }
     });
 </script>

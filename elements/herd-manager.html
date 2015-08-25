@@ -31,14 +31,12 @@
                 <paper-toolbar >
                     <paper-item>Main</paper-item>
                 </paper-toolbar>
-                <div style="border-left: 1px solid #ccc;">
+                <div style="border-left: 1px solid #ccc;" layout vertical>
                     <paper-material id="herdAdd" elevation="2">
                         <herd-add></herd-add>
                     </paper-material>
-                     <paper-material id="herdList" elevation="1">
-                    <div id="list">
+                     <paper-material id="herdList" flex elevation="1" style="overflow-y: scroll;">
                         <herd-list></herd-list>
-                    </div>
                     </paper-material>
                 </div>
             </paper-header-panel>
@@ -54,20 +52,16 @@
 <style>
 #herdAdd{
     margin: 0;
-		width: 100%;
-		max-width: none;
-		border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    width: 100%;
+    max-width: none;
+    border-bottom: 1px solid #ccc;
 }
 .main-panel {
 		background-color: #eee;
-		bottom:0px;
 	}
     paper-material {
 		background-color: #fff;
-	}
-    #list {
-		overflow-y: scroll;
-		height: 66vh;
 	}
 </style>
   <script>

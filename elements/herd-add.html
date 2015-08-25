@@ -4,9 +4,9 @@
         <firebase-collection id="firebaseCollection"
           location="{{firebaseUrl}}"
           data="{{animals}}"></firebase-collection>
-        <paper-input value="{{newAnimal.id::input}}" label="Id"></paper-input>
-        <paper-input value="{{newAnimal.name::input}}" label="Name"></paper-input>
-        <paper-button raised on-click="addAnimal">Add</paper-button>
+        <paper-item ><paper-item-body class="flex"><paper-input value="{{newAnimal.id::input}}" label="Id"></paper-input></paper-item-body></paper-item>
+        <paper-item><paper-item-body class="flex"><paper-input value="{{newAnimal.name::input}}" label="Name" ></paper-input></paper-item-body>
+        <paper-button raised on-click="addAnimal">Add</paper-button></paper-item>
       </template>   
   </dom-module>
   <script>
